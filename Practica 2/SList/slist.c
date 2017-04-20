@@ -47,7 +47,7 @@ void slist_recorrer(SList lista, FuncionVisitante visit) {
     visit(nodo->dato);
 }
 
-unsigned int slist_longitud (SList lista) {
+size_t slist_longitud (SList lista) {
   unsigned int counter = 0;
   
   for (SNodo *nodo = lista; nodo != NULL; nodo = nodo->sig)
@@ -56,10 +56,9 @@ unsigned int slist_longitud (SList lista) {
   return counter;
 }
 
-void slist_concatenar(SList lista1, SList lista2) {
+SList slist_concatenar(SList lista1, SList lista2) {
   if (lista1 == NULL) {
-    printf("NO ME PASES UNA LISTA NULA, FORRO!\n");
-    return;
+    return lista2;
   }
   
   SNodo *nodo = lista1;
@@ -67,6 +66,8 @@ void slist_concatenar(SList lista1, SList lista2) {
   for (; nodo->sig != NULL; nodo = nodo->sig);
   
   nodo->sig = lista2;
+  
+  return lista1;
 }
 
 SList slist_insertar(SList lista, unsigned int posicion, int dato) {  
@@ -139,7 +140,6 @@ unsigned int slist_contiene(SList lista, int elemento) {
   return 0; /* Asumiendo que 0 es FALSE */
 }
 
-
 unsigned int slist_indice(SList lista, int dato){
   int i = 0;
   for (SNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
@@ -184,15 +184,15 @@ SList slist_ordenar(SList lista, FuncionComparadora comp) {
   SList ordenada = NULL;
   
   for (SNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
-    /* Ni idea que hacer aca, la verdad
-     * Quedara para consulta o la clase */
+    /* Hacer tipo bubble sort, no tiene que ser nada
+     * muy eficiente */
   }
 }
 
 SList slist_reverso(SList lista) {
   SList ultimo = NULL;
   SList siguiente = NULL;
-  SList resultado;
+  SList resultado = NULL;
   
   while (lista) {
     siguiente = lista->sig;
@@ -203,6 +203,15 @@ SList slist_reverso(SList lista) {
   }
   
   return resultado;
+}
+
+SList slist_reverso_v2 (SList lista) {
+  SList nuevaLista = NULL;
+  
+  for (SNodo *nodo = lista; nodo != NULL; nodo = nodo->sig)
+    nuevaLista = slist_agregar_inicio(nuevaLista, nodo->dato);
+    
+  return nuevaLista;
 }
 
 SList slist_intercalar(SList lista1, SList lista2) {

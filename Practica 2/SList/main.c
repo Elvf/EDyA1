@@ -15,7 +15,7 @@ int main(int argc, char *argv[]) {
   SList lista = slist_crear();
   SList lista2 = slist_crear();
   SList interseccion, interseccion2, intercalada;
-  unsigned int longitud;
+  size_t longitud;
   int index, index2;
 
   lista = slist_agregar_inicio(lista, 3);
@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
   /**
    * Funcion Concatenar
    */
-  slist_concatenar(lista, lista2);
+  lista = slist_concatenar(lista, lista2);
   
   puts("Listas concatenadas en Lista 1:");
   slist_recorrer(lista, imprimir_entero);

@@ -43,9 +43,9 @@ SList slist_agregar_inicio(SList lista, int dato);
  */
 void slist_recorrer(SList lista, FuncionVisitante visit);
 
-unsigned int slist_longitud (SList lista);
+size_t slist_longitud (SList lista);
 
-void slist_concatenar(SList lista1, SList lista2);
+SList slist_concatenar(SList lista1, SList lista2);
 
 SList slist_insertar(SList lista, unsigned int posicion, int dato);
 
