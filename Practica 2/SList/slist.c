@@ -181,12 +181,34 @@ SList slist_ordenar(SList lista, FuncionComparadora comp) {
   /* La lista ya esta ordenada si solo tiene un elemento o es vacia */
   if (lista == NULL || lista->sig == NULL) return lista;
   
-  SList ordenada = NULL;
+  int comparaciones;
   
-  for (SNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
-    /* Hacer tipo bubble sort, no tiene que ser nada
-     * muy eficiente */
+  for (comparaciones = 0; comparaciones < slist_longitud(lista); comparaciones++) {
+    SList actual = lista;
+    SList siguiente = lista->sig;
+    SList previo = NULL;
+    
+    while (siguiente != NULL) {
+      if (comp(actual->dato, siguiente->dato)) {
+        if (actual == lista)
+          lista = siguiente;
+        else
+          previo->sig = siguiente;
+        
+        actual->sig = siguiente->sig;
+        siguiente->sig = actual;
+        
+        previo = siguiente;
+        siguiente = actual->sig;
+      } else {
+        previo = actual;
+        actual = actual->sig;
+        siguiente = siguiente->sig;
+      }
+    }
   }
+  
+  return lista;
 }
 
 SList slist_reverso(SList lista) {

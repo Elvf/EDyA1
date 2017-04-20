@@ -10,6 +10,10 @@ int dosEquis (int a, int b) {
   return (a == 2 * b);
 }
 
+int comparacion (int a, int b) {
+  return a > b;
+}
+
 int main(int argc, char *argv[]) {
 
   SList lista = slist_crear();
@@ -35,7 +39,7 @@ int main(int argc, char *argv[]) {
    * Funcion Longitud
    */
   longitud = slist_longitud(lista);
-  printf("Longitud lista 1: %d\n", longitud);
+  printf("Longitud lista 1: %lu\n", longitud);
   puts("");
 
   /**
@@ -96,9 +100,14 @@ int main(int argc, char *argv[]) {
   /**
    * Funcion Ordenar
    */
+  puts("Lista 1 sin ordenar");
+  slist_recorrer(lista, imprimir_entero);
+  puts("\n");
   
-  /* DEBUG */
-  slist_recorrer(lista2, imprimir_entero); // Aca lista2 sigue igual
+  lista = slist_ordenar(lista, comparacion);
+  
+  puts("Lista 1 ordenada");
+  slist_recorrer(lista, imprimir_entero);
   puts("\n");
   
   /**
@@ -108,14 +117,6 @@ int main(int argc, char *argv[]) {
 
   puts("Lista 1 invertida");
   slist_recorrer(lista, imprimir_entero);
-  puts("\n");
-  
-  /**
-   * ERROR
-   * Por algun motivo, aca es donde cambia lista2
-   * PREGUNTAR !!
-   */
-  slist_recorrer(lista2, imprimir_entero);
   puts("\n");
   
   /**
