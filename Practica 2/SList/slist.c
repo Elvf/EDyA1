@@ -132,24 +132,112 @@ SList slist_eliminar(SList lista, unsigned int posicion) {
 
 unsigned int slist_contiene(SList lista, int elemento) {
   for (SNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
-    if (nodo->dato == elemento) {
+    if (nodo->dato == elemento)
       return 1; /*Asumiendo que 1 es TRUE */
-    }
   }
   
   return 0; /* Asumiendo que 0 es FALSE */
 }
 
-/*
-unsigned int slist_indice(SList lista, int dato);
 
-SList slist_intersecar(SList lista1, SList lista2);
+unsigned int slist_indice(SList lista, int dato){
+  int i = 0;
+  for (SNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
+    if (nodo->dato == dato)
+      return i;
+    
+    i++;
+  }
+  
+  return -1;
+}
 
-SList slist_intersecar_custom(SList lista1, SList lista2, FuncionVisitante comp);
+SList slist_intersecar(SList lista1, SList lista2) {
+  SList interseccion = NULL;
+  
+  for (SNodo *nodo = lista1; nodo != NULL; nodo = nodo->sig) {
+    if (slist_contiene(lista2, nodo->dato))
+      interseccion = slist_agregar_inicio(interseccion, nodo->dato);
+  }
+  
+  return interseccion;
+}
 
-void slist_ordenar(SList lista, FuncionVisitante comp);
+SList slist_intersecar_custom(SList lista1, SList lista2, FuncionComparadora comp) {
+  SList customInterseccion = NULL;
+  
+  for (SNodo *nodo = lista1; nodo != NULL; nodo = nodo->sig) {
+    for (SNodo *nodo2 = lista2; nodo2 != NULL; nodo2 = nodo2->sig) {
+      if (comp(nodo->dato, nodo2->dato)) {
+        customInterseccion = slist_agregar_inicio(customInterseccion, nodo->dato);
+      }
+    }
+  }
+  
+  return customInterseccion;
+}
 
-SList slist_reverso(SList lista);
+SList slist_ordenar(SList lista, FuncionComparadora comp) {
+  /* La lista ya esta ordenada si solo tiene un elemento o es vacia */
+  if (lista == NULL || lista->sig == NULL) return lista;
+  
+  SList ordenada = NULL;
+  
+  for (SNodo *nodo = lista; nodo != NULL; nodo = nodo->sig) {
+    /* Ni idea que hacer aca, la verdad
+     * Quedara para consulta o la clase */
+  }
+}
 
-SList slist_intercalar(SList lista1, SList lista2);
-*/
+SList slist_reverso(SList lista) {
+  SList ultimo = NULL;
+  SList siguiente = NULL;
+  SList resultado;
+  
+  while (lista) {
+    siguiente = lista->sig;
+    lista->sig = ultimo;
+    ultimo = lista;
+    resultado = lista;
+    lista = siguiente;
+  }
+  
+  return resultado;
+}
+
+SList slist_intercalar(SList lista1, SList lista2) {
+  if (lista1 == NULL && lista2 == NULL)
+    return lista1;
+  else if (lista1 == NULL)
+    return lista2;
+  else if (lista2 == NULL)
+    return lista1;
+  
+  SList listaIntercalada = NULL;
+  
+  if (slist_longitud(lista1) >= slist_longitud(lista2)) {
+    SList nodo2 = lista2;
+    
+    for (SNodo *nodo = lista1; nodo != NULL; nodo = nodo->sig) {
+      listaIntercalada = slist_agregar_final(listaIntercalada, nodo->dato);
+      
+      if (nodo2) {
+        listaIntercalada = slist_agregar_final(listaIntercalada, nodo2->dato);
+        nodo2 = nodo2->sig;
+      }
+    }
+  } else {
+    SList nodo1 = lista1;
+    
+    for (SNodo *nodo = lista2; nodo != NULL; nodo = nodo->sig) {
+      if (nodo1) {
+        listaIntercalada = slist_agregar_final(listaIntercalada, nodo1->dato);
+        nodo1 = nodo1->sig;
+      }
+      
+      listaIntercalada = slist_agregar_final(listaIntercalada, nodo->dato);
+    }
+  }
+  
+  return listaIntercalada;
+}

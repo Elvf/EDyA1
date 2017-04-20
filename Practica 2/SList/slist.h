@@ -4,6 +4,7 @@
 #include <stddef.h>
 
 typedef void (*FuncionVisitante) (int dato);
+typedef int (*FuncionComparadora) (int c1, int c2);
 
 typedef struct _SNodo {
   int dato;
@@ -56,9 +57,9 @@ unsigned int slist_indice(SList lista, int dato);
 
 SList slist_intersecar(SList lista1, SList lista2);
 
-SList slist_intersecar_custom(SList lista1, SList lista2, FuncionVisitante comp);
+SList slist_intersecar_custom(SList lista1, SList lista2, FuncionComparadora comp);
 
-void slist_ordenar(SList lista, FuncionVisitante comp);
+SList slist_ordenar(SList lista, FuncionComparadora comp);
 
 SList slist_reverso(SList lista);
 
