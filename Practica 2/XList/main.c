@@ -18,5 +18,7 @@ int main(int argc, char *argv[]) {
   xlist_recorrer(test, imprimir_entero);
   puts("");
   
+  xlist_destruir(test);
+
   return 0;
 }
