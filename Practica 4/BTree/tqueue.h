@@ -14,7 +14,7 @@ typedef TQueueNode *TQueue;
 
 TQueue tqueue_crear(void);
 TQueue tqueue_encolar(TQueue c, BTree nodo);
-void tqueue_desencolar(TQueue c);
+TQueue tqueue_desencolar(TQueue c);
 void tqueue_destruir(TQueue c);
 
 #endif /* __TQUEUE_H__ */

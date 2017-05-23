@@ -156,7 +156,7 @@ void btree_recorrer_bfs(BTree arbol, FuncionVisitante visit) {
       cola = tqueue_encolar(cola, cola->currentNode->right);
     }
     
-    tqueue_desencolar(cola);
+    cola = tqueue_desencolar(cola);
   }
   
   puts(" ");

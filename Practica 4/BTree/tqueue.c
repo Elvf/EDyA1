@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <stdlib.h>
 #include "tqueue.h"
 
@@ -22,15 +23,20 @@ TQueue tqueue_encolar(TQueue c, BTree nodo) {
   }
 }
 
-void tqueue_desencolar(TQueue c) {
-  if (c) {
-    TQueueNode *temp = c;
+TQueue tqueue_desencolar(TQueue c) {
+  if (!c) return NULL;
+  
+  if (c->next == c) {
+    free(c);
+    return NULL;
+  } else {
+    TQueueNode *tmp = c->next;
     c->prev->next = c->next;
     c->next->prev = c->prev;
-    c = c->next;
     
-    free(temp);
-  } else return;
+    free(c);
+    return tmp;
+  }
 }
 
 void tqueue_destruir(TQueue c) {
