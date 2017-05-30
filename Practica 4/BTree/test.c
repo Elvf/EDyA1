@@ -7,8 +7,10 @@ static void imprimir_entero(int data) {
 }
 
 int main() {
+  BTree lrl = btree_unir(6, btree_crear(), btree_crear());
+  BTree lr = btree_unir(7, lrl, btree_crear());
   BTree ll = btree_unir(1, btree_crear(), btree_crear());
-  BTree l = btree_unir(2, ll, btree_crear());
+  BTree l = btree_unir(2, ll, lr);
   BTree r = btree_unir(3, btree_crear(), btree_crear());
   BTree raiz = btree_unir(4, l, r);
   int suma, nodos, niveles;
@@ -32,6 +34,12 @@ int main() {
   printf("Nodos Extra: %d\n\n", nodos);
   
   btree_recorrer_bfs(raiz, imprimir_entero);
+  puts("");
+  
+  raiz = btree_espejar(raiz);
+  
+  btree_recorrer(raiz, BTREE_RECORRIDO_POST, imprimir_entero);
+  puts("");
   
   btree_destruir(raiz);
 

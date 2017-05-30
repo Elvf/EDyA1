@@ -158,6 +158,21 @@ void btree_recorrer_bfs(BTree arbol, FuncionVisitante visit) {
     
     cola = tqueue_desencolar(cola);
   }
+}
+
+/**
+ * Ejercicio 7
+ */
+BTree btree_espejar(BTree arbol) {
+  BTree temp = arbol;
+  BTNodo *nodo;
   
-  puts(" ");
+  if(!arbol) return NULL;
+  
+  temp->left = btree_espejar(temp->left);
+  temp->right = btree_espejar(temp->right);
+  
+  nodo = temp->left;
+  temp->left = temp->right;
+  temp->right = nodo;
 }

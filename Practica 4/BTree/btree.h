@@ -60,4 +60,9 @@ int btree_nodos_extra(BTree arbol);
  */
 void btree_recorrer_bfs(BTree arbol, FuncionVisitante visit);
 
+/**
+ * Ejercicio 7
+ */
+BTree btree_espejar(BTree arbol);
+
 #endif /* __BTREE_H__ */

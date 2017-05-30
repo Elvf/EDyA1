@@ -80,9 +80,9 @@ void dlist_recorrer(DList lista, FuncionVisitante visit, DListOrdenDeRecorrido r
       
   } else if (recorrido == DLIST_RECORRIDO_HACIA_ATRAS) {
     
-    visit(lista->dato);
+    visit(lista->prev->dato);
     
-    for (DNodo *nodo = lista->prev; nodo != lista; nodo = nodo->prev)
+    for (DNodo *nodo = lista->prev->prev; nodo != lista->prev; nodo = nodo->prev)
       visit(nodo->dato);
       
   } else {
