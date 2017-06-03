@@ -1,0 +1,18 @@
+9) b) Para que luego de agregar varios elementos el arbol resultante
+tenga forma de lista, es necesario que sea completo, es decir que los
+niveles del arbol deben estar "completos". Si esto no sucediera, no
+seria posible representar al arbol como una lista.
+
+  c) En caso de buscar un elemento en la lista, en el mejor de los casos
+no deberemos recorrerla, ya que el primer elemento puede ser el que
+buscamos. En el peor de los casos, el elemento que buscamos puede estar
+al final de la lista, por lo que deberemos recorrerla de principio a
+final.
+     Si nosotros tenemos un arbol binario de busqueda que no tiene forma
+de lista, entonces la cantidad de pasos necesaria para encontrar un
+elemento especifico en dicho arbol es mucho menor, ya que si el elemento
+no corresponde con el de la raiz, si es mayor podemos descartar todo el
+subarbol izquierdo, y si es menor podemos descartar todo el subarbol
+derecho, ya que sabemos de antemano que todo elemento ubicado en el
+subarbol izquierdo es menor a la raiz, y todo elemento ubicado en el
+subarbol derecho es mayor a la raiz.
