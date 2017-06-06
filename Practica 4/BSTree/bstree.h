@@ -42,6 +42,6 @@ BSTree bstree_balancear(BSTree arbol);
 
 int bstree_minimo(BSTree arbol);
 
-int bstree_acceder(BSTree arbol);
+int bstree_acceder(BSTree arbol, int indice);
 
 #endif /* __BSTREE_H__ */

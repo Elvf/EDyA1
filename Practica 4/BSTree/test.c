@@ -8,11 +8,13 @@ static void imprimir_entero(int a) {
 int main(int argc, char *argv[]) {
   BSTree root = NULL;
   
-  root = bstree_insertar(root, 1);
-  root = bstree_insertar(root, 2);
   root = bstree_insertar(root, 3);
-  root = bstree_insertar(root, 4);
-  root = bstree_insertar(root, 5);
+  root = bstree_insertar(root, 2);
+  root = bstree_insertar(root, 9);
+  root = bstree_insertar(root, 0);
+  root = bstree_insertar(root, 7);
+  root = bstree_insertar(root, -1);
+  root = bstree_insertar(root, -4);
   
   bstree_recorrer(root, BTREE_RECORRIDO_PRE, imprimir_entero);
   puts("");
@@ -21,6 +23,10 @@ int main(int argc, char *argv[]) {
   
   bstree_recorrer(root, BTREE_RECORRIDO_PRE, imprimir_entero);
   puts("");
+  
+  printf("Minimo: %d\n", bstree_minimo(root));
+  
+  printf("Elem en la pos 0: %d\n", bstree_acceder(root, 0));
   /*
   root = bstree_eliminar(root, 3);
   root = bstree_eliminar(root, 1);

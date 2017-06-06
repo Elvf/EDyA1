@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <assert.h>
 #include "bstree.h"
 
 BSTree bstree_insertar(BSTree arbol, int dato) {
@@ -198,6 +199,35 @@ BSTree bstree_balancear(BSTree arbol) {
   return arbol;
 }
 
-int bstree_minimo(BSTree arbol);
+int bstree_minimo(BSTree arbol) {
+  BSNode *nodo = arbol;
+  
+  while (nodo->left != NULL) {
+    nodo = nodo->left;
+  }
+    
+  return nodo->dato;
+}
 
-int bstree_acceder(BSTree arbol);
+int *acceder_recorrido(BSTree arbol, int indice, int* cur) {
+  if(!arbol) return NULL;
+  
+  acceder_recorrido(arbol->left, indice, cur);
+  
+  if (indice == *cur) {
+    return &(arbol->dato);
+  } else {
+    (*cur)++;
+  }
+  
+  acceder_recorrido(arbol->right, indice, cur);
+}
+
+/* El i-esimo elemento del in-order */
+int bstree_acceder(BSTree arbol, int indice) {
+  int cur = 0;
+  int *elem = acceder_recorrido(arbol, indice, &cur);
+  assert(elem);
+  
+  return *elem;
+}
