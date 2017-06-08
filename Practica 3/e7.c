@@ -61,6 +61,9 @@ void bheap_insertar(BHeap h, int d) {
   h->datos[i] = d;
 }
 
+/**
+ * Ejercicio 9
+ */
 void heapify(BHeap h, int i) {
   int smallest = (lchild(i) < h->nelems && h->datos[lchild(i)] < h->datos[i]) ? lchild(i) : i;
   
@@ -91,14 +94,53 @@ void bheap_imprimir(BHeap h) {
   puts(" ");
 }
 
+/**
+ * Ejercicio 10
+ */
+BHeap bheap_merge(BHeap h1, BHeap h2) {
+  if (bheap_es_vacio(h1))
+    return h2;
+  else if (h1->nelems == MAX_HEAP)
+    return h1;
+    
+  BHeap output = bheap_crear();
+  int i, totalElems;
+  
+  if (h1->nelems + h2->nelems == MAX_HEAP)
+    totalElems = MAX_HEAP;
+  else totalElems = h1->nelems + h2->nelems;
+  
+  /* Copiamos todos los elementos a un nuevo heap...
+   * Lamentablemente, esta es la unica forma "eficiente" que se
+   * me ocurrio para hacerlo. Practicamente corre en O(2 log (k)) */
+  for(i = 0; i < h1->nelems; i++) {
+    bheap_insertar(output, h1->datos[i]);
+  }
+  
+  for(i = 0; i < totalElems - h1->nelems; i++) {
+    bheap_insertar(output, h2->datos[i]);
+  }
+  
+  heapify(output, 0);
+  
+  return output;
+}
+
 int main(int argc, char *argv[]) {
   BHeap hippy = bheap_crear();
+  BHeap hip = bheap_crear();
   
   bheap_insertar(hippy, 1);
   bheap_insertar(hippy, 7);
   bheap_insertar(hippy, 5);
   bheap_insertar(hippy, 4);
   bheap_insertar(hippy, 2);
+  
+  //bheap_insertar(hip, -3);
+  //bheap_insertar(hip, 4);
+  //bheap_insertar(hip, 0);
+  //bheap_insertar(hip, 1);
+  //bheap_insertar(hip, -4);
   
   printf("Nelems: %d\n\n", hippy->nelems);
   

@@ -209,7 +209,7 @@ int bstree_minimo(BSTree arbol) {
   return nodo->dato;
 }
 
-int *acceder_recorrido(BSTree arbol, int indice, int* cur) {
+static int *acceder_recorrido(BSTree arbol, int indice, int* cur) {
   if(!arbol) return NULL;
   
   acceder_recorrido(arbol->left, indice, cur);
